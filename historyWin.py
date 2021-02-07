@@ -246,6 +246,7 @@ class history_data(QWidget):
     def MatplotlibWidget(self):
         time_x1 = []
         time_x2 = []
+        time_x3 = []
         shuiwen_y = []
         youya_y = []
         fadongji_y = []
@@ -265,9 +266,8 @@ class history_data(QWidget):
         erjishusongyali_2_y = []
         erjishusongliuliang_y = []
 
-        # 读取扭矩或者是5个传感器压力
-        # with open(r'E:\甘蔗机网关\cane11.6\run\run2020\env2019\env\torque_data.txt') as f:
-        with open('/home/rpdzkj/run/run2020/env2019/env/ins_data.txt') as f:
+        # 读取仪表盘数据：发动机转速，水温，油压，time_x1
+        with open('/home/rpdzkj/run/run2020/env2019/env/ins_data.txt', 'r') as f:
             line = f.readline()
             while line:
                 ins_data = eval(line)
@@ -275,30 +275,34 @@ class history_data(QWidget):
                 shuiwen_y.append(ins_data['water_temperature'])
                 youya_y.append(ins_data['oil_pressure'])
                 fadongji_y.append(ins_data['engine_speed'])
-                qieduandaoyali_1_y.append(ins_data['fluid_one'])
-                qieduandaoyali_2_y.append(ins_data['fluid_two'])
-                paifengjiyali_1_y.append(ins_data['fluid_three'])
-                paifengjiyali_2_y.append(ins_data['fluid_four'])
-                shusonggunyali_1_y.append(ins_data['fluid_five'])
-                shusonggunyali_2_y.append(ins_data['fluid_six'])
-                erjishusongyali_1_y.append(ins_data['fluid_senven'])
-                erjishusongyali_2_y.append(ins_data['fluid_eight'])
                 line = f.readline()
-        # 读取仪表盘数据：转速，水温，油压
-        # with open(r'E:\甘蔗机网关\cane11.6\run\run2020\env2019\env\ins_data.txt') as f:
-        # 读取5个传感器流量
-        with open('/home/rpdzkj/run/run2020/env2019/env/flow_data.txt') as f:
+        # 读取4个流量
+        with open('/home/rpdzkj/run/run2020/env2019/env/flow_data.txt', 'r') as f:
             line2 = f.readline()
             while line2:
                 flow_data = eval(line2)
                 time_x2.append(flow_data['time'])
                 # time_x2.append((ins_data['time']))
-                qieduandaoliuliang_y.append(flow_data['flow_one'])
-                paifengjiliuliang_y.append(flow_data['flow_two'])
-                shusonggunliuliang_y.append(flow_data['flow_three'])
-                erjishusongliuliang_y.append(flow_data['flow_four'])
+                qieduandaoliuliang_y.append(flow_data['1_flow_ch'])
+                paifengjiliuliang_y.append(flow_data['2_flow_ch'])
+                shusonggunliuliang_y.append(flow_data['3_flow_ch'])
+                erjishusongliuliang_y.append(flow_data['4_flow_ch'])
                 line2 = f.readline()
-
+        # 读取8个油压
+        with open('/home/rpdzkj/run/run2020/env2019/env/oilPressure_data.txt', 'r') as f:
+            line3 = f.readline()
+            while line3:
+                oilPressure_data = eval(line3)
+                time_x3.append(oilPressure_data['time'])
+                qieduandaoyali_1_y.append(oilPressure_data['1_oilPressure_ch'])
+                qieduandaoyali_2_y.append(oilPressure_data['2_oilPressure_ch'])
+                paifengjiyali_1_y.append(oilPressure_data['3_oilPressure_ch'])
+                paifengjiyali_2_y.append(oilPressure_data['4_oilPressure_ch'])
+                shusonggunyali_1_y.append(oilPressure_data['5_oilPressure_ch'])
+                shusonggunyali_2_y.append(oilPressure_data['6_oilPressure_ch'])
+                erjishusongyali_1_y.append(oilPressure_data['7_oilPressure_ch'])
+                erjishusongyali_2_y.append(oilPressure_data['8_oilPressure_ch'])
+                line3 = f.readline()
         # 水温图
         self.shuiwen = History_Canvas()
         # self.shuiwen.history_plot()
@@ -331,34 +335,34 @@ class history_data(QWidget):
         # 输送辊马达压力
         self.shusonggun = History_Canvas()
         # self.shusonggun.history_plot()
-        # # x = [i for i in range(1, 11)]
-        # # y6 = [random.randint(0, 100) for i in range(10)]
-        # # y7 = [random.randint(0, 100) for i in range(10)]
-        self.shusonggun.shusonggun_line(time_x1, shusonggunyali_1_y, shusonggunyali_2_y)
+        # x = [i for i in range(1, 11)]
+        # y6 = [random.randint(0, 100) for i in range(10)]
+        # y7 = [random.randint(0, 100) for i in range(10)]
+        self.shusonggun.shusonggun_line(time_x3, shusonggunyali_1_y, shusonggunyali_2_y)
         self.gridLayout_5.addWidget(self.shusonggun)
         # # 切断刀马达压力
         self.qieduandao = History_Canvas()
         # self.qieduandao.history_plot()
-        # # x = [i for i in range(1, 11)]
-        # # y8 = [random.randint(0, 100) for i in range(10)]
-        # # y9 = [random.randint(0, 100) for i in range(10)]
-        self.qieduandao.qieduandao_line(time_x1, qieduandaoyali_1_y, qieduandaoyali_2_y)
+        # x = [i for i in range(1, 11)]
+        # y8 = [random.randint(0, 100) for i in range(10)]
+        # y9 = [random.randint(0, 100) for i in range(10)]
+        self.qieduandao.qieduandao_line(time_x3, qieduandaoyali_1_y, qieduandaoyali_2_y)
         self.gridLayout_6.addWidget(self.qieduandao)
         # # 排风机马达压力
         self.paifengji = History_Canvas()
         # self.paifengji.history_plot()
-        # # x = [i for i in range(1, 11)]
-        # # y10 = [random.randint(0, 100) for i in range(10)]
-        # # y11 = [random.randint(0, 100) for i in range(10)]
-        self.paifengji.paifengji_line(time_x1, paifengjiyali_1_y, paifengjiyali_2_y)
+        # x = [i for i in range(1, 11)]
+        # y10 = [random.randint(0, 100) for i in range(10)]
+        # y11 = [random.randint(0, 100) for i in range(10)]
+        self.paifengji.paifengji_line(time_x3, paifengjiyali_1_y, paifengjiyali_2_y)
         self.gridLayout_7.addWidget(self.paifengji)
         # # 二级输送压力
         self.erjishusong = History_Canvas()
         # self.erjishusong.history_plot()
-        # # x = [i for i in range(1, 11)]
-        # # y10 = [random.randint(0, 100) for i in range(10)]
-        # # y11 = [random.randint(0, 100) for i in range(10)]
-        self.erjishusong.erjishusong_line(time_x1, erjishusongyali_1_y, erjishusongyali_2_y)
+        # x = [i for i in range(1, 11)]
+        # y10 = [random.randint(0, 100) for i in range(10)]
+        # y11 = [random.randint(0, 100) for i in range(10)]
+        self.erjishusong.erjishusong_line(time_x3, erjishusongyali_1_y, erjishusongyali_2_y)
         self.gridLayout_8.addWidget(self.erjishusong)
 
 class History_Canvas(FigureCanvas):  #画板

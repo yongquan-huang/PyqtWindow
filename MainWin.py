@@ -394,22 +394,22 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def testTimer_timeout_handle(self):
-        # from app.CloudConn.cane_harvester import torque_real_data_dict
-        from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict, flow_real_data_dict
+        from app.CloudConn.cane_harvester import flow_real_data_dict, oilPressure_real_data_dict
+        # from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict, flow_real_data_dict
         # 各个马达流量
-        qieduandao_liuliang = flow_real_data_dict.get('flow_one', 0)
-        chuzhafengji_liuliang = flow_real_data_dict.get('flow_two', 0)
-        yijishusong_liuliang = flow_real_data_dict.get('flow_three', 0)
-        erjishusong_liuliang = flow_real_data_dict.get('flow_four', 0)
+        qieduandao_liuliang = flow_real_data_dict.get('1_flow_ch', 0)
+        chuzhafengji_liuliang = flow_real_data_dict.get('2_flow_ch', 0)
+        yijishusong_liuliang = flow_real_data_dict.get('3_flow_ch', 0)
+        erjishusong_liuliang = flow_real_data_dict.get('4_flow_ch', 0)
         # 各个马达压力
-        qieduandao_yali_1 = ins_real_data_dict.get('fluid_one', 0)
-        qieduandao_yali_2 = ins_real_data_dict.get('fluid_two', 0)
-        chuzhafengji_yali_1 = ins_real_data_dict.get('fluid_three', 0)
-        chuzhafengji_yali_2 = ins_real_data_dict.get('fluid_four', 0)
-        yijishusong_yali_1 = ins_real_data_dict.get('fluid_five', 0)
-        yijishusong_yali_2 = ins_real_data_dict.get('fluid_six', 0)
-        erjishusong_yali_1 = ins_real_data_dict.get('fluid_senven', 0)
-        erjishusong_yali_2 = ins_real_data_dict.get('fluid_eight', 0)
+        qieduandao_yali_1 = oilPressure_real_data_dict.get('1_oilPressure_ch', 0)
+        qieduandao_yali_2 = oilPressure_real_data_dict.get('2_oilPressure_ch', 0)
+        chuzhafengji_yali_1 = oilPressure_real_data_dict.get('3_oilPressure_ch', 0)
+        chuzhafengji_yali_2 = oilPressure_real_data_dict.get('4_oilPressure_ch', 0)
+        yijishusong_yali_1 = oilPressure_real_data_dict.get('5_oilPressure_ch', 0)
+        yijishusong_yali_2 = oilPressure_real_data_dict.get('6_oilPressure_ch', 0)
+        erjishusong_yali_1 = oilPressure_real_data_dict.get('7_oilPressure_ch', 0)
+        erjishusong_yali_2 = oilPressure_real_data_dict.get('8_oilPressure_ch', 0)
         self.label_6.setText(str(yijishusong_liuliang) + 'L/min')
         self.label_7.setText(str(yijishusong_yali_1) + 'bar')
         self.label_7_2.setText(str(yijishusong_yali_2) + 'bar')
@@ -458,8 +458,8 @@ class GaugePanel(QWidget):
 
     @pyqtSlot()
     def testTimer_timeout_handle(self):
-        from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
-        # from app.CloudConn.cane_harvester import ins_real_data_dict
+        # from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
+        from app.CloudConn.cane_harvester import ins_real_data_dict
         self.value = ins_real_data_dict.get('engine_speed', 0)
         self.value = float(self.value)
         # self.value = self.value + 1
@@ -627,8 +627,8 @@ class GaugePanel2(GaugePanel):
 
     @pyqtSlot()
     def testTimer_timeout_handle(self):
-        # from app.CloudConn.cane_harvester import ins_real_data_dict
-        from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
+        from app.CloudConn.cane_harvester import ins_real_data_dict
+        # from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
         self.value = ins_real_data_dict.get('oil_pressure', 0)
         self.value = float(self.value)
 
@@ -753,8 +753,8 @@ class GaugePanel3(GaugePanel2):
 
     @pyqtSlot()
     def testTimer_timeout_handle(self):
-        # from app.CloudConn.cane_harvester import ins_real_data_dict
-        from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
+        from app.CloudConn.cane_harvester import ins_real_data_dict
+        # from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
         self.value = ins_real_data_dict.get('water_temperature', 0)
         self.value = float(self.value)
 
@@ -770,8 +770,8 @@ class GaugePanel4(GaugePanel2):
 
     @pyqtSlot()
     def testTimer_timeout_handle(self):
-        # from app.CloudConn.cane_harvester import ins_real_data_dict
-        from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
+        from app.CloudConn.cane_harvester import ins_real_data_dict
+        # from run.run2020.env2019.env.app.CloudConn.cane_harvester import ins_real_data_dict
         self.value = ins_real_data_dict.get('battery_voltage', 0)
         self.value = float(self.value)
 
